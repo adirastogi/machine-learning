@@ -12,6 +12,15 @@ figure; hold on;
 %               examples and 'ko' for the negative examples.
 %
 
+%find all the indices that give y=0 and y=1;
+pos0 = find(y==0);
+pos1 = find(y==1);
+
+%plot the first class
+plot(X(pos1,1),X(pos1,2),'g+','LineWidth',2,'MarkerSize',7);
+
+%plot the second class
+plot(X(pos0,1),X(pos0,2),'rx','MarkerSize',7);
 
 
 
