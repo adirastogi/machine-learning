@@ -22,12 +22,27 @@ p = zeros(size(X, 1), 1);
 %
 
 
+%writing a generic implementation with cell arrays used to store the theta matrices at each layer from 1 to n-1
 
+%cell array containing the theta matrices calculated for eac layer starting from 1
+this_layer = X';
+theta_layer = {Theta1 Theta2};
 
+for j=1:length(theta_layer)
+	
+	%add the bias feature to each sample
+	this_layer  = [ones(1,m); this_layer];
+	%calculate the activations for the next layer
+	next_layer = sigmoid(theta_layer{j}*this_layer);
+	%move to next layer
+	this_layer = next_layer;
+	
+end
+%prev now contains a cXm  matrix where c is the class label and m columns are the  hypothesis values of the traing sample i.
 
-
-
-
+%calculate the class label as the row c with maximum val in each column
+[t p] =  max(this_layer);
+p = p';
 
 % =========================================================================
 

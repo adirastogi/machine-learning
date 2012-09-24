@@ -49,17 +49,20 @@ X = [ones(m, 1) X];
 %                 initial_theta, options);
 %
 
+initial_theta = zeros(n+1,1);
+options = optimset('GradObj','on','MaxIter',50);
 
+for i=1:num_labels
 
+	class_ground_truth = (y==i);
+	
+	%compute the min cost using the fminc function
+	[class_theta a b] = fmincg(@(t)(lrCostFunction(t,X,class_ground_truth,lambda)),initial_theta,options);
+	
+	%set the theta in the larger matrix.transpose required because class_theta is a column vector
+	all_theta(i,:) = class_theta';
 
-
-
-
-
-
-
-
-
+end
 % =========================================================================
 
 

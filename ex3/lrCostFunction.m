@@ -36,7 +36,16 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
+x = X;
+z = x*theta;
+h = sigmoid(z);   %h is a mx1 vector
+cost = (y.*log(h)) + ((1-y).*log(1-h));
 
+theta(1) = 0;
+regterm1 = (lambda/(2*m))*sum(theta.^2);
+J = -(1/m)*sum(cost) + regterm1;
+regterm2 = (lambda/m)*theta;
+grad = (1/m).*(x'*(h-y)) + regterm2;
 
 
 
